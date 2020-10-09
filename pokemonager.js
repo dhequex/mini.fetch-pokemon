@@ -1,21 +1,23 @@
 (() => {
   class Pokemonager {
     // This should return an array of all the names of n Pokemon from the Pokemon API.
+    
     findNames(n) {
-     fetch(`https://pokeapi.co/api/v2/pokemon?${n}`)
+     fetch(`https://pokeapi.co/api/v2/pokemon?${n}?limit=${n}`)
       .then((Response) => {
         return Response.json();
 
       })
       .then((json) =>{
-        console.log(json)
+        return json.results.map((jsonElement) => {
+          return jsonElement["name"];
+        });
       })
-        
-
-    
-      
-
-    }
+      .then((arrayOfNames) => {
+        console.log(arrayOfNames);
+      });
+  
+    };
 
     // This should return an array of all the Pokemon that are under a particular weight.
 
