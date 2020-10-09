@@ -19,19 +19,21 @@
     // This should return an array of all the Pokemon that are under a particular weight.
 
     findUnderWeight(weight) {
-      fetch(`https://pokeapi.co/api/v2/pokemon/1/?limit=10`)
-        .then((Response) =>{
-          return Response.json();
+      
+      let list =[];
+      for (let i = 0; i < 10; i ++){
+        list.push(fetch(`https://pokeapi.co/api/v2/pokemon/1`)
+        .then(response => response.json()) 
+        )
+      } 
+      return Promise.all(list)
+      .then((list) => {
+       
+        return list.filter((pokemon) =>{
+          pokemon.weight < weight;
         })
-        .then((json) => {
-          return json.results.map((pokemon) => {
-            console.log(pokemon);
-          })
-        })
-      // Your code here.
-      // ** LIMIT TO THE FIRST 10 POKEMON
-      // We don't want to make too many unnecessary calls to the Pokemon API
-    }
+      })
+    };
   }
 
   window.Pokemonager = Pokemonager;
