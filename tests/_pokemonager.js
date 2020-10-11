@@ -5,7 +5,7 @@ let pokemonager;
 describe("pokemonager", () => {
   beforeEach(() => {
     pokemonager = new Pokemonager();
-    console.log(pokemonager);
+    
   });
 
   it("should return an array of names of all Pokemon", () => {

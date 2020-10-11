@@ -21,17 +21,19 @@
     findUnderWeight(weight) {
       
       let list =[];
-      for (let i = 0; i < 10; i ++){
-        list.push(fetch(`https://pokeapi.co/api/v2/pokemon/1`)
-        .then(response => response.json()) 
+      for (let i = 1; i < 11; i ++){
+        list.push(fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+        .then((response) => response.json()) 
         )
       } 
+      
       return Promise.all(list)
+      
       .then((list) => {
-       
-        return list.filter((pokemon) =>{
-          pokemon.weight < weight;
+        let filtered = list.filter( pokemon =>{
+          return pokemon.weight < weight;
         })
+         return filtered
       })
     };
   }
